@@ -1,0 +1,35 @@
+{
+    "tableName": "transfers",
+    "schemaName": "tpch",
+    "topicName": "tpch.transfers",
+    "message": {
+        "dataFormat": "json",
+        "fields": [
+            {
+                "name": "transferId",
+                "mapping": "transferId",
+                "type": "VARCHAR"
+            },
+            {
+                "name": "poolId",
+                "mapping": "poolId",
+                "type": "VARCHAR"
+            },
+            {
+                "name": "_from",
+                "mapping": "from",
+                "type": "VARCHAR"
+            },
+            {
+                "name": "to",
+                "mapping": "to",
+                "type": "VARCHAR"
+            },
+            {
+                "name": "amount",
+                "mapping": "amount",
+                "type": "DOUBLE"
+            }
+        ]
+    }
+}
