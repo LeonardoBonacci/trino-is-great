@@ -12,20 +12,12 @@ https://trino.io/docs/current/connector/kafka-tutorial.html
 ```
 
 ```
-/kafka-tpch load --brokers localhost:9092 --prefix tpch. --tpch-type tiny
-```
-
-TODO add 'when' field
-
-```
 ./bin/kafka-console-producer --bootstrap-server localhost:9092 --topic tpch.transfers --property "parse.key=true" --property "key.separator=:"
-bahamas: {"transferId": "i-am-random", "poolId": "bahamas", "from":"foo", "to":"bar", "amount":10.10}
-bahamas: {"transferId": "i-am-random", "poolId": "bahamas", "from":"bar", "to":"goo", "amount":5.10}
+bahamas: {"transferId": "i-am-random", "poolId": "bahamas", "from":"foo", "to":"bar", "amount":10.10, "when":1674179837 }
+bahamas: {"transferId": "i-am-random", "poolId": "bahamas", "from":"bar", "to":"goo", "amount":5.10 , "when":1674189838 }
 
 ./bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic tpch.transfers --property print.key=true --property key.separator=" >" --from-beginning
 
-
-SELECT sum(cast(json_extract_scalar(_message, '$.amount') AS double)) FROM transfers;
 ```
 
 ```

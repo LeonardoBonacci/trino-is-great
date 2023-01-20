@@ -29,6 +29,11 @@
                 "name": "amount",
                 "mapping": "amount",
                 "type": "DOUBLE"
+            },
+            {
+                "name": "when",
+                "mapping": "when",
+                "type": "BIGINT"
             }
         ]
     }
