@@ -44,8 +44,19 @@ services:
     container_name: trino
     depends_on:
       - broker
+      - db
     ports:
       - "8080:8080"
     volumes:
       - $PWD/etc:/etc/trino
+
+  db:
+    image: leonardobonacci/example-mysql:2.0
+    build: ./mysql
+    ports:
+     - 3306:3306
+    environment:
+     - MYSQL_ROOT_PASSWORD=debezium
+     - MYSQL_USER=mysqluser
+     - MYSQL_PASSWORD=mysqlpw
    
