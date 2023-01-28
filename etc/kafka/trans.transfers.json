@@ -1,7 +1,7 @@
 {
     "tableName": "transfers",
-    "schemaName": "tpch",
-    "topicName": "tpch.transfers",
+    "schemaName": "trans",
+    "topicName": "trans.transfers",
     "message": {
         "dataFormat": "json",
         "fields": [

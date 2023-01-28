@@ -12,11 +12,11 @@ https://trino.io/docs/current/connector/kafka-tutorial.html
 ```
 
 ```
-./bin/kafka-console-producer --bootstrap-server localhost:9092 --topic tpch.transfers --property "parse.key=true" --property "key.separator=:"
+./bin/kafka-console-producer --bootstrap-server localhost:9092 --topic trans.transfers --property "parse.key=true" --property "key.separator=:"
 bahamas: {"transferId": "i-am-random", "poolId": "bahamas", "from":"foo", "to":"bar", "amount":10.10, "when":1674179837 }
 bahamas: {"transferId": "i-am-random", "poolId": "bahamas", "from":"bar", "to":"goo", "amount":5.10 , "when":1674189838 }
 
-./bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic tpch.transfers --property print.key=true --property key.separator=" >" --from-beginning
+./bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic trans.transfers --property print.key=true --property key.separator=" >" --from-beginning
 ```
 
 ```
@@ -27,7 +27,7 @@ SELECT coalesce(SMILE, 0) - coalesce(CRY, 0) AS balance FROM debit, credit;
 ```
 
 ```
-trino:tpch> WITH
+trino:trans> WITH
          ->   debit AS (SELECT sum(amount) AS SMILE FROM transfers where to = 'bar'),
          ->   credit AS (SELECT sum(amount) AS CRY FROM transfers where _from = 'bar')
          -> SELECT coalesce(SMILE, 0) - coalesce(CRY, 0) AS balance FROM debit, credit;
@@ -52,13 +52,13 @@ COMMENT 'A table to join.';
 INSERT INTO bla VALUES (1, 'foo');
 
 select mysql.heroes.bla.* from mysql.heroes.bla;
-select kafka.tpch.transfers.* from kafka.tpch.transfers;
+select kafka.trans.transfers.* from kafka.trans.transfers;
 
-select bla.*, transfers.* from mysql.heroes.bla as bla join kafka.tpch.transfers as transfers on transfers._from = bla.blaname;
+select bla.*, transfers.* from mysql.heroes.bla as bla join kafka.trans.transfers as transfers on transfers._from = bla.blaname;
 ```
 
 ```
-trino> select bla.*, transfers.* from mysql.heroes.bla as bla join kafka.tpch.transfers as transfers on transfers._from = bla.blaname;
+trino> select bla.*, transfers.* from mysql.heroes.bla as bla join kafka.trans.transfers as transfers on transfers._from = bla.blaname;
  blakey | blaname | transferid  | poolid  | _from | to  | amount |    when
 --------+---------+-------------+---------+-------+-----+--------+------------
       1 | foo     | i-am-random | bahamas | foo   | bar |   10.1 |       NULL
